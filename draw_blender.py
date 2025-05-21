@@ -3,23 +3,30 @@ import os
 
 design_json_path = "/Users/broyou/Desktop/ME/gear_design/design.json"
 
+import bpy
+import mathutils
 
-def ensure_points_num(num=200):
-    # 统计已有点的数量，假设命名为 "Point.xxx"
-    existing_points = [obj for obj in bpy.data.objects if obj.name.startswith("Point")]
-    num_existing = len(existing_points)
-    
-    # 需要创建的点数
-    to_create = num - num_existing
-    
-    for i in range(to_create):
-        # 创建一个空对象作为点（也可以是mesh sphere等）
-        bpy.ops.object.empty_add(type='PLAIN_AXES', location=(0, 0, 0))
-        new_obj = bpy.context.object
-        new_obj.name = f"Point.{num_existing + i:03d}"  # 命名为 Point.000 ~ Point.199
 
-    print(f"总共已有点数量: {len([obj for obj in bpy.data.objects if obj.name.startswith('Point')])}")
+def create_point_cloud_container(name="PointContainer", num=200):
+    # 如果已存在同名对象，先删除
+    obj = bpy.data.objects.get(name)
+    if obj:
+        bpy.data.objects.remove(obj, do_unlink=True)
+    # 创建空网格和对象
+    mesh = bpy.data.meshes.new(name + "_Mesh")
+    obj = bpy.data.objects.new(name, mesh)
+    bpy.context.collection.objects.link(obj)
+    # 设置为活动对象并选中
+    bpy.context.view_layer.objects.active = obj
+    obj.select_set(True)
+    # 生成 num 个顶点（平铺）
+    verts = [(i % 10, i // 10, 0) for i in range(num)]
+    mesh.from_pydata(verts, [], [])  # 无边无面，只含顶点
+    mesh.update()
+    print(f"已创建物体 {name}，包含 {len(mesh.vertices)} 个点。")
 
+# 调用函数
+create_point_cloud_container(num=200)
 
 
 
@@ -177,6 +184,16 @@ import bpy
 import bmesh
 import mathutils
 
+
+
+
+obj = bpy.data.objects.get("PointContainer")
+# bpy.context.collection.objects.link(obj)
+
+# 设置为活动对象并选中
+# bpy.context.view_layer.objects.active = obj
+obj.select_set(True)
+
 # 编辑模式下
 bpy.ops.object.mode_set(mode='OBJECT')
 obj = bpy.context.object
@@ -203,9 +220,6 @@ box_width = 2*data['box']['Delta_2'] + data['box']['Delta_3'] + data['gear_pair_
 
 x_1_2 = data['bear_1']['D']
 
-
-# 确保有足够的点
-ensure_points_num(200)
 
 
 all_verts[PName_idx[2]].co = all_verts[PName_idx[1]].co.copy()
