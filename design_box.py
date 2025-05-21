@@ -82,7 +82,7 @@ box['Delta_1'] = box['delta']
 box['Delta_2'] = box['delta']
 
 # 分箱面凸缘尺寸A
-box['A'] = box['delta']+box['d_2'].c1+box['d_2'].c2+5
+box['A'] = box['delta']+box['d_1'].c1+box['d_1'].c2+5
 box['B'] = box['A'] + 5
 
 box['h'] = None
@@ -133,6 +133,20 @@ class Bear(Part):
         return self.dict[key]
     def __dict__(self):
         return self.dict
+
+
+
+T1,T2,T3 = out_shaft[3]
+# 切向力
+F1_small = T1 / d1_small * 2
+F2_big = T2 / d2_big * 2
+F2_small = T2 / d2_small * 2
+F3_big = T3 / d3_big * 2
+# 计算轴向力
+F1_small_shaft = F1_small * np.tan(np.deg2rad(20))
+F2_big_shaft = F2_big * np.tan(np.deg2rad(20))
+F2_small_shaft = F2_small * np.tan(np.deg2rad(20))
+F3_big_shaft = F3_big * np.tan(np.deg2rad(20))
 
 
 bear_1 = Bear('bear_1',"6005", 25, 47, 12, 0.6, 30, 42, 0.6)

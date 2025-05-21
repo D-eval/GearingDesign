@@ -48,7 +48,7 @@ def design_gear(P, n, i, N, z):
     z1 = z
     z2 = int(z * i)
     K_Ht = 1.3
-    T_1 = 9.55e6 * P / n
+    T_1 = 9.55e6 * P / n # 力矩,单位 N/mm
     Z_H = (2 / (np.cos(alpha)*np.sin(alpha)))**(1/2)
 
     alpha_a1 = np.arccos(z1*np.cos(alpha)/(z1+2*h_a_star))
