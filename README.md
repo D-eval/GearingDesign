@@ -20,6 +20,10 @@ python3 design_box.py --F_w 3.2 --v_w 0.95 --D 440
 
 随后打开blender，在`脚本`中复制粘贴并运行`draw_blender.py`文件，即可得到减速箱模型。
 
+## 学习
+
+结合课本学习，参考ipynb文件
+
 ## 局限性
 
 还有一些不能更改的条件, 如果想改可以去AllCharts.py里按照机械设计书上的图表录入插值的数据

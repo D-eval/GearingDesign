@@ -12,12 +12,6 @@ parser.add_argument('--D', type=float, default=440, help='滚筒直径 (mm)')
 
 args = parser.parse_args()
 
-# 使用传入的参数
-F_w = args.F_w       # kN
-v_w = args.v_w       # m/s
-D = args.D    # 转换成米
-
-
 ALL_BOLT = [8,10,12,16,20,24,30]
 def select_bolt(d):
     k = ALL_BOLT
