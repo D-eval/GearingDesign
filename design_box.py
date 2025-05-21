@@ -15,7 +15,7 @@ args = parser.parse_args()
 # 使用传入的参数
 F_w = args.F_w       # kN
 v_w = args.v_w       # m/s
-D = args.D / 1000    # 转换成米
+D = args.D    # 转换成米
 
 
 ALL_BOLT = [8,10,12,16,20,24,30]
