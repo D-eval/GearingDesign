@@ -18,7 +18,7 @@ python3 design_box.py --F_w 3.2 --v_w 0.95 --D 440
 
 输出设计参数至 design.json 文件。
 
-随后打开blender，在`脚本`中复制粘贴并运行`draw_blender.py`文件，即可得到减速箱模型。
+随后打开blender，在`脚本`中复制粘贴并运行`create_point_and_draw_box.py`文件，即可得到减速箱模型。
 
 其余的画图文件在`/blenderCode`下
 
